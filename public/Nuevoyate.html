@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nuevo Yate</title>
+    <link rel="icon" sizes="32x32" href="favicon.ico">
+    <meta name="theme-color" content="#ffcb2d">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="estilos.css">
+    <script type="module" src="lib/registraServiceWorker.js"></script>
+    <script src="lib/polycustom.js"></script>
+    <script type="module" src="mi-footer.js"></script>
+  </head>
+  <body>
+    <form id="vista">
+      <header>
+        <a href="index.html">Cancelar</a>
+        <button type="submit">Guardar</button>
+        <h1>Nuevo Yate</h1>
+      </header>
+      <p><input id="marca" type="text" placeholder="Marca" required></p>
+      <p><input id="modelo" type="text" placeholder="Modelo" required></p>
+      <footer is="mi-footer"></footer>
+    </form>
+    <script src="/__/firebase/7.2.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.2.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script type="module">
+      import { error } from "./lib/util.js";
+      const firestore = firebase.firestore();
+      firestore.enablePersistence()
+        .catch(error)
+        .then(() => vista.addEventListener("submit", guarda));
+      async function guarda(evt) {
+        try {
+          evt.preventDefault();
+          const MARCA_YATE = marca.value.trim();
+          const MODELO_YATE = modelo.value.trim();
+          const modeloyhl = { MARCA_YATE , MODELO_YATE };
+          await firestore.collection("YATES").add(modeloyhl);
+          document.location = "index.html";
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    </script>
+  </body>
+</html>

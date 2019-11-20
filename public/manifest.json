@@ -1,0 +1,16 @@
+{
+    "short_name": "Yates",
+    "name": "YATES",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#4fc3f7",
+    "theme_color": "#01DFD7",
+    "icons": [
+      {
+        "src": "icono.png",
+        "sizes": "2048x2048",
+        "type": "image/png"
+      }
+    ]
+  }
+  
